@@ -11,7 +11,7 @@ const ArticlesService = {
         'art.style',
         'art.content',
         db.raw(
-          `count(DISTINCT comm) AS number_of_comments`
+          'count(DISTINCT comm) AS number_of_comments'
         ),
         db.raw(
           `json_strip_nulls(
@@ -24,17 +24,17 @@ const ArticlesService = {
               'date_modified', usr.date_modified
             )
           ) AS "author"`
-        ),
+        )
       )
       .leftJoin(
         'blogful_comments AS comm',
         'art.id',
-        'comm.article_id',
+        'comm.article_id'
       )
       .leftJoin(
         'blogful_users AS usr',
         'art.author_id',
-        'usr.id',
+        'usr.id'
       )
       .groupBy('art.id', 'usr.id');
   },
@@ -72,7 +72,7 @@ const ArticlesService = {
       .leftJoin(
         'blogful_users AS usr',
         'comm.user_id',
-        'usr.id',
+        'usr.id'
       )
       .groupBy('comm.id', 'usr.id');
   },
